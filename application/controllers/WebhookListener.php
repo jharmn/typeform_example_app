@@ -1,9 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-error_reporting(E_STRICT);
-
-
 class WebhookListener extends CI_Controller {
 
 	private function textAnswerByField($array, $field_type, $field_id){
@@ -20,6 +17,16 @@ class WebhookListener extends CI_Controller {
 		}
 
     		return "";
+	}
+
+	private function winOrLose() {
+		// Calculates a 0 or 1, 1 is a winner (10% of the time by default)
+		$rand = (float)rand()/(float)getrandmax();
+		if ($rand < 0.1)
+			$result = 1;
+		else
+			$result = 0;
+		return $result;
 	}
 
 	/**
@@ -66,13 +73,15 @@ class WebhookListener extends CI_Controller {
 			$first_name = $this->textAnswerByField($response["answers"], "short_text", $this->config->item("webhook_fname_field_id"));
 			$last_name = $this->textAnswerByField($response["answers"], "short_text", $this->config->item("webhook_lname_field_id"));
 			$email = $this->textAnswerByField($response["answers"], "email", $this->config->item("webhook_email_field_id"));
+			$winner = $this->winOrLose();
 
 			// Store answer/fields in db
-			$insert_query = "INSERT INTO Entries (Token, FirstName, LastName, Email) VALUES(".
+			$insert_query = "INSERT INTO Entries (Token, FirstName, LastName, Email, Winner) VALUES(".
 				$this->db->escape($token).", ".
 				$this->db->escape($first_name).", ".
 				$this->db->escape($last_name).", ".
-				$this->db->escape($email).")";	
+				$this->db->escape($email).", ".
+				$this->db->escape($winner).");";
 			if (! $this->db->query($insert_query)) {
 				show_error('Unable to store webhook', 500);
 			}
