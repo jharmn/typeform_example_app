@@ -6,7 +6,7 @@ error_reporting(E_STRICT);
 
 class WebhookListener extends CI_Controller {
 
-	function textAnswerByField($array, $field_type, $field_id){
+	private function textAnswerByField($array, $field_type, $field_id){
 		for ($a = 0; $a < count($array); $a++) {
 			$answer = $array[$a];
 			$field = $answer["field"];
@@ -56,7 +56,7 @@ class WebhookListener extends CI_Controller {
 		// Ensure uniqueness
 		$token = $response["token"];		
 		$this->load->database();
-		$query = $this->db->query("SELECT token FROM Webhooks WHERE Token = ".$this->db->escape($token)." LIMIT 1");
+		$query = $this->db->query("SELECT token FROM Entries WHERE Token = ".$this->db->escape($token)." LIMIT 1");
 		$row = $query->row();
 		if (count($row) > 0) {
 			show_error('Token exists', 409);
@@ -68,7 +68,7 @@ class WebhookListener extends CI_Controller {
 			$email = $this->textAnswerByField($response["answers"], "email", $this->config->item("webhook_email_field_id"));
 
 			// Store answer/fields in db
-			$insert_query = "INSERT INTO Webhooks (Token, FirstName, LastName, Email) VALUES(".
+			$insert_query = "INSERT INTO Entries (Token, FirstName, LastName, Email) VALUES(".
 				$this->db->escape($token).", ".
 				$this->db->escape($first_name).", ".
 				$this->db->escape($last_name).", ".
