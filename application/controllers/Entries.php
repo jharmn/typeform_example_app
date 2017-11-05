@@ -1,5 +1,5 @@
 <?php
-class Winners extends CI_Controller {
+class Entries extends CI_Controller {
 
         public function __construct()
         {
@@ -9,8 +9,8 @@ class Winners extends CI_Controller {
 
         public function index()
         {
-                $data['winners'] = $this->entries_model->get_winners();
-		$data['title'] = 'Contest winners!';
+                $data['entries'] = $this->entries_model->get_entries();
+		$data['title'] = 'Meet and Greet!';
 
         	$this->load->view('templates/header', $data);
         	$this->load->view('entries/index', $data);

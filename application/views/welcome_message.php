@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
+	<title>Welcome to Typeform's Developer Platform demo!</title>
 
 	<style type="text/css">
 
@@ -68,18 +68,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+	<h1>Welcome to Typeform's Developer Platform demo!</h1>
 
 	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+		<div>
+		This is a demo of Typeform's APIs and webhooks.
+		<img align="right" src="https://d31kvrskfu54aq.cloudfront.net/dist/img/common/typeform_new_logo@2x.png?v=1710"/>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
+		<ul>
+		<li><a href="/index.php/Embed/index">Register for class</a></li>	
+		<li><a href="/index.php/Entries/index">See your classmates! (Webhooks)</a></li>	
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+		<li><a href="/index.php/Authorize/index">Authorize your Typeform account</a></li>	
+		<li><a href="/index.php/EntriesApi/index">See your classmates! (OAuth + Responses API)</a></li>	
+		<li><a href="/index.php/Create/index">Template gallery (Create API)</a></li>	
+		</div>
 	</div>
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>

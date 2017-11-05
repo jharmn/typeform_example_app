@@ -1,7 +1,12 @@
 <h2><?php echo $title; ?></h2>
 
-<?php foreach ($winners as $winner): ?>
 
-        <h3><?php echo $winner['FirstName']." ".$winner['LastName']; ?></h3>
+<table>
+<tr><th>First Name</th><th>Last Name</th></tr>
+<?php foreach ($entries as $entry): ?>
+
+        <tr><td><?php echo $entry['FirstName']."</td><td>".$entry['LastName']; ?></td></tr>
+
 
 <?php endforeach; ?>
+</table>
