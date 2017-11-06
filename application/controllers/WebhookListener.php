@@ -37,13 +37,15 @@ class WebhookListener extends CI_Controller {
 			$first_name = textAnswerByField($answers, "short_text", $this->config->item("webhook_fname_field_id"));
 			$last_name = textAnswerByField($answers, "short_text", $this->config->item("webhook_lname_field_id"));
 			$email = textAnswerByField($answers, "email", $this->config->item("webhook_email_field_id"));
+			$image = textAnswerByField($answers, "file_url", $this->config->item("webhook_image_field_id"));
 
 			// Store answer/fields in db
-			$insert_query = "INSERT INTO Entries (Token, FirstName, LastName, Email) VALUES(".
+			$insert_query = "INSERT INTO Entries (Token, FirstName, LastName, Email, ImageUrl) VALUES(".
 				$this->db->escape($token).", ".
 				$this->db->escape($first_name).", ".
 				$this->db->escape($last_name).", ".
-				$this->db->escape($email).")";
+				$this->db->escape($email).",".
+				$this->db->escape($image).")";
 			if (! $this->db->query($insert_query)) {
 				show_error('Unable to store webhook', 500);
 			}

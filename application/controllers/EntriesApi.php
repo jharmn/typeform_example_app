@@ -16,7 +16,7 @@ class EntriesApi extends CI_Controller {
 			#echo 'Access Token: ' .$accessToken. "<br>";
 		
 			$client = new GuzzleHttp\Client();
-			$res = $client->request('GET', "https://api.typeform.com/forms/".$this->config->item("form_id")."/responses", [
+			$res = $client->request('GET', "https://api.typeform.com/forms/".$this->config->item("form_id")."/responses?completed=true", [
 				'headers' => [
 				'Authorization' => 'Bearer '.$accessToken,
 				'Accept' => 'application/json'	
@@ -29,10 +29,12 @@ class EntriesApi extends CI_Controller {
 				$first_name = textAnswerByField($answers, "short_text", $this->config->item("webhook_fname_field_id"));
 				$last_name = textAnswerByField($answers, "short_text", $this->config->item("webhook_lname_field_id"));
 				$email = textAnswerByField($answers, "email", $this->config->item("webhook_email_field_id"));
+				$image = textAnswerByField($answers, "file_url", $this->config->item("webhook_image_field_id"));
 				$data[sizeOf($data)] = array(
 					"FirstName"=>$first_name,
 					"LastName"=>$last_name,
-					"Email"=>$email);
+					"Email"=>$email,
+					"ImageUrl"=>$image);
 			}
 			return $data;
 		}

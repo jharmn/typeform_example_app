@@ -9,6 +9,9 @@ function textAnswerByField($array, $field_type, $field_id){
 				return $answer["text"];
 			} else if ($field_type == "email") {
 				return $answer["email"];
+			} else if ($field_type == "file_url") {
+				return $answer["file_url"];
+		$field = $answer["field"];
 			}
 		}
 	}
