@@ -18,16 +18,16 @@ class Authorize extends CI_Controller {
 		    'redirectUri'             => 'https://restart_typeform.ngrok.io/index.php/Authorize/index',
 		    'urlAuthorize'            => 'https://api.typeform.com/oauth/authorize',
 		    'urlAccessToken'          => 'https://api.typeform.com/oauth/token',
-		    'urlResourceOwnerDetails' => 'https://api.typeform.com/forms/cTMRbU'
+		    'urlResourceOwnerDetails' => 'https://api.typeform.com/forms'
 		]);
-
+		$scopes = 'forms:read forms:write responses:read webhooks:read';
 		// If we don't have an authorization code then get one
 		if (!isset($_GET['code'])) {
 
 		    // Fetch the authorization URL from the provider; this returns the
 		    // urlAuthorize option and generates and applies any necessary parameters
 		    // (e.g. state).
-		    $authorizationUrl = $provider->getAuthorizationUrl(['scope' => 'forms:read forms:write responses:read webhooks:read']);
+		    $authorizationUrl = $provider->getAuthorizationUrl(['scope' => $scopes]);
 
 		    // Get the state generated for you and store it to the session.
 		    $_SESSION['oauth2state'] = $provider->getState();
@@ -54,8 +54,16 @@ class Authorize extends CI_Controller {
 			    'code' => $_GET['code']
 			]);
 
+			// TODO: Maybe store that access token in a db
 			$_SESSION['access_token'] = $accessToken->getToken();
-			redirect('/Entries/index', 'auto');
+
+			// Grab redirect from query param
+			parse_str(parse_url($_SERVER['REQUEST_URI'])["query"], $query);
+			if (isset($query['redirect'])) {
+				redirect($query['redirect'], 'auto');	
+			} else {
+				redirect('/Welcome/index', 'auto');
+			}
 
 		    } catch (\League\OAuth2\Client\Provider\Exception\IdentityProviderException $e) {
 

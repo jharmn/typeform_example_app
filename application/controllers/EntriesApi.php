@@ -26,10 +26,10 @@ class EntriesApi extends CI_Controller {
 			$data = array();
 			foreach ($json['items'] as $item) {
 				$answers = $item['answers'];
-				$first_name = textAnswerByField($answers, "short_text", $this->config->item("webhook_fname_field_id"));
-				$last_name = textAnswerByField($answers, "short_text", $this->config->item("webhook_lname_field_id"));
-				$email = textAnswerByField($answers, "email", $this->config->item("webhook_email_field_id"));
-				$image = textAnswerByField($answers, "file_url", $this->config->item("webhook_image_field_id"));
+				$first_name = textAnswerByField($answers, $this->config->item("webhook_fname_field_id"));
+				$last_name = textAnswerByField($answers, $this->config->item("webhook_lname_field_id"));
+				$email = textAnswerByField($answers, $this->config->item("webhook_email_field_id"));
+				$image = textAnswerByField($answers, $this->config->item("webhook_image_field_id"));
 				$data[sizeOf($data)] = array(
 					"FirstName"=>$first_name,
 					"LastName"=>$last_name,

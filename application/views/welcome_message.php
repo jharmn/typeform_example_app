@@ -81,7 +81,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<li><a href="/index.php/Authorize/index">Authorize your Typeform account</a></li>	
 		<li><a href="/index.php/EntriesApi/index">See your classmates! (OAuth + Responses API)</a></li>	
-		<li><a href="/index.php/Create/index">Template gallery (Create API)</a></li>	
+		<li><a href="/index.php/EmbedMenu/index">Weekly menu builder (Create API)</a></li>	
 		</div>
 	</div>
 

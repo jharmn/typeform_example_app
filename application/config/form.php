@@ -8,4 +8,6 @@ $config['webhook_lname_field_id'] = 'wycpQQkjdmUv';
 $config['webhook_email_field_id'] = 'VusAj66FK2cR';
 $config['webhook_image_field_id'] = 'OpnrNJBr1G5K';
 
+$config['typeform_access_token'] = 'yjhYDtqpBfrweNa5HqnJI2FLfFOkoIMHbKTHgGEnIfY=';
+$config['menu_form_id'] = 'JulSxK';
 ?>

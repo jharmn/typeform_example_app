@@ -11,10 +11,10 @@
 <?php foreach ($entries as $entry): ?>
 
         <tr>
-		<td><?php echo $entry['FirstName'] ?>.</td>
+		<td><?php echo $entry['FirstName'] ?></td>
 		<td><?php echo $entry['LastName'] ?></td>
 		<td><?php echo $entry['Email'] ?></td>
-		<td><img src="<?php echo $entry['ImageUrl'] ?>" width="300" /></td>
+		<td><img src="<?php echo $entry['ImageUrl'] ?>" width="200" /></td>
 	</tr>
 
 
