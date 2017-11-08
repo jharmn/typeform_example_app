@@ -45,10 +45,16 @@ class WebhookListener extends CI_Controller {
 		} else {
 			// Retrieve answer/fields from webhook
 			$answers = $response["answers"];
-			$first_name = textAnswerByField($answers, $this->config->item("webhook_fname_field_id"));
-			$last_name = textAnswerByField($answers, $this->config->item("webhook_lname_field_id"));
-			$email = textAnswerByField($answers, $this->config->item("webhook_email_field_id"));
-			$image = textAnswerByField($answers, $this->config->item("webhook_image_field_id"));
+			$fields = $response['definition']['fields'];
+
+			#$first_name = textAnswerByField($answers, $this->config->item("fname_field_id"));
+			#$last_name = textAnswerByField($answers, $this->config->item("lname_field_id"));
+			#$email = textAnswerByField($answers, $this->config->item("email_field_id"));
+			#$image = textAnswerByField($answers, $this->config->item("image_field_id"));
+			$first_name = textAnswerByRef($fields, $answers, $this->config->item("fname_field_ref"));
+			$last_name = textAnswerByRef($fields, $answers, $this->config->item("lname_field_ref"));
+			$email = textAnswerByRef($fields, $answers, $this->config->item("email_field_ref"));
+			$image = textAnswerByRef($fields, $answers, $this->config->item("image_field_ref"));
 
 			// Store answer/fields in db
 			$insert_query = "INSERT INTO Entries (Token, FirstName, LastName, Email, ImageUrl) VALUES(".
@@ -207,18 +213,21 @@ class WebhookListener extends CI_Controller {
 
 		$json = json_decode($res->getBody(), true);
 		$new_form_url = $json['_links']['display'];
-		#echo $new_form_url;
+		echo $new_form_url;
 		
-		// Send email to all classmates
+		// TODO: Send email to all classmates
+		// TODO: Get email list from db
+		/*
 		$headers = "From: lunch@restart.network\r\n";
 		$headers .= "Reply-To: lunch@restart.network\r\n";
 		$headers .= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 		$email_subject = 'Order your lunch for '.$timeframe;
 		$email_message = '<div>Don\'t forget to order your lunch for next week!</div><div><a href="'.$new_form_url.'">Order here!</a></div>';
-		// TODO: Email everyone registered
-		#$email_result = mail('jason.harmon@gmail.com', $email_subject, $email_message, $headers);
-		#echo "Mail status: ".$email_result;
+
+		$email_result = mail('jason.harmon@gmail.com', $email_subject, $email_message, $headers);
+		echo "Mail status: ".$email_result;
+		*/	
 	}
 
 

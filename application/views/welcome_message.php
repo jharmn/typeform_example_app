@@ -77,11 +77,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		<ul>
 		<li><a href="/index.php/Embed/index">Register for class</a></li>	
+		<li><a href="/index.php/EntriesApi/index">See your classmates! (Responses API)</a></li>	
 		<li><a href="/index.php/Entries/index">See your classmates! (Webhooks)</a></li>	
-
-		<li><a href="/index.php/Authorize/index">Authorize your Typeform account</a></li>	
-		<li><a href="/index.php/EntriesApi/index">See your classmates! (OAuth + Responses API)</a></li>	
 		<li><a href="/index.php/EmbedMenu/index">Weekly menu builder (Create API)</a></li>	
+		<li><a href="/index.php/Authorize/index">Authorize your Typeform account</a></li>	
 		</div>
 	</div>
 
