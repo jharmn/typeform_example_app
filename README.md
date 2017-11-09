@@ -1,6 +1,8 @@
 ## Example app for Typeform APIs/Webhooks
 
-Example application uses a 'contest entry' form, capturing first name/last name/email. Random winners of the contest are displayed on the 'Winners' page.
+This is an example application for a Typeform Master Class at Restart Network Rotterdam. It uses a 'registration'-style form, capturing first name/last name/email/pic for students in the class. 
+
+Additionally, there is a "menu builder" form, which in turn creates a form to pick lunch selections for a week. This emulates the process we use at Typeform for managing our in-office lunch logistics.
 
 This application has no sophisticated error handling and shouldn't be used for real applications in it's current state.
 
@@ -8,11 +10,12 @@ This application has no sophisticated error handling and shouldn't be used for r
 
 1. Create a typeform
 
-  * Ensure form contains the following fields:
+  * Ensure form contains the following fields :
 
-    * `short_text`: First name
-    * `short_text`: Last name
-    * `email`: Email address (obviously)
+    * `short_text`: First name (ref: fname)
+    * `short_text`: Last name (ref: lname)
+    * `email`: Email address (ref: email)
+    * `image`: Photo of student (ref: pic)
 
 
 2. Create `application/config/form.php`
@@ -21,13 +24,26 @@ This application has no sophisticated error handling and shouldn't be used for r
 
 ```
 <?php
-# Example values
-$config['webhook_form_id'] = 'fda8hrw2';
+// Typeform personal access token (for accessing your own account)
+$config['typeform_access_token'] = 'yjhYDtqyBfrweNy5HqnJI2xLfFOkoxMHbKTHxGEnIfY=';
+// Typeform username, for embedding
+$config['typeform_username'] = 'jasonharmon';
+// Registration form id
+$config['form_id'] = 'fda8hrw2';
+// Arbitrary developer-defined key, for securing webhook listener
 $config['webhook_auth_key'] = 'abc123';
-$config['webhook_fname_field_id'] = 'EwxhuXSL9Tu1';
-$config['webhook_lname_field_id'] = 'wycpQQkjdmUv';
-$config['webhook_email_field_id'] = 'VusAj66FK2cR';
 
+// You can either use form field `id`
+$config['fname_field_id'] = 'EwxhuXSL9Tu1';
+$config['lname_field_id'] = 'wycpQQkjdmUv';
+$config['email_field_id'] = 'VusAj66FK2cR';
+$config['image_field_id'] = 'OpnrNJBr1G5K';
+
+// ...or field `ref`:
+$config['fname_field_ref'] = 'fname';
+$config['lname_field_ref'] = 'lname';
+$config['email_field_ref'] = 'email';
+$config['image_field_ref'] = 'pic';
 ?>
 ```
 
